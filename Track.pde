@@ -5,6 +5,7 @@ public class Track{
      //now our barriers
     barriers = new Barrier[1];
     barriers[0] = new Barrier(100,100,10,400);
+    //barriers[1] = new Barrier(0,0,width,height);
     //barriers[1] = new Barrier(180,500,440,30);
     //barriers[2] = new Barrier(1000,500,150,30);
     //barriers[3] = new Barrier(640,400,380,30);

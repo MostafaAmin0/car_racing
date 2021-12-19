@@ -84,9 +84,19 @@ public ArrayList<Barrier> checkCollisionList(Player s, Barrier[] bars){
 void keyPressed(){
   if(keyCode == RIGHT){
     player.change_x = MOVE_SPEED;
+    player.turnRight();
   }
   else if(keyCode == LEFT){
     player.change_x = -MOVE_SPEED;
+    player.turnLeft();
+  }
+  else if(keyCode == UP ){
+    player.change_y= -MOVE_SPEED;
+    player.up();
+  }
+   else if(keyCode == DOWN ){
+    player.change_y= MOVE_SPEED;
+    player.down();
   }
 }
 
@@ -94,8 +104,14 @@ void keyPressed(){
 void keyReleased(){
   if(keyCode == RIGHT){
     player.change_x = 0;
+    
   }
   else if(keyCode == LEFT){
     player.change_x = 0;
+  }else if(keyCode == UP ){
+    player.change_y=0;
+  }
+   else if(keyCode == DOWN ){
+    player.change_y= 0;
   }
 }
