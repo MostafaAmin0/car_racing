@@ -56,12 +56,24 @@ public void resolvePlatformCollisions(Player s, Barrier[] barriers){
 
 
 boolean checkCollision(Player s1, Barrier bar){
-  boolean noXOverlap = s1.getRight() <= bar.getLeft() || s1.getLeft() >= bar.getRight();
-  boolean noYOverlap = s1.getBottom() <= bar.getTop() || s1.getTop() >= bar.getBottom();
-  if(noXOverlap || noYOverlap){
+  boolean noXOverlap1 = s1.getRight() <= bar.getLeft() ;
+  boolean noXOverlap2 = s1.getLeft() >= bar.getRight() ;
+  boolean noXOverlap = noXOverlap1 ||noXOverlap2 ;
+  
+  boolean noYOverlap1 = s1.getBottom() <= bar.getTop() ;
+  boolean noYOverlap2 = s1.getTop() >= bar.getBottom();
+  boolean noYOverlap = noYOverlap1||noYOverlap2;
+  
+  println("noXOverlap1 " +noXOverlap1);
+  println("noXOverlap2 " +noXOverlap2);
+  println("noYOverlap1 "+noYOverlap1);
+  println("noYOverlap2 "+noYOverlap2);
+  
+  if(noXOverlap || noYOverlap ){
     return false;
   }
   else{
+    print("Alooooooooooooooooooooooooooooooooooooooooooooooo");
     return true;
   }
 }
@@ -97,8 +109,8 @@ void keyPressed(){
     //player.speed -= 0.5;
     player.down();
   }
-  print((180*( player.direction)/PI)+" ");
-  print(sin( player.direction)+" " +cos( player.direction) +"\n");
+  //print((180*( player.direction)/PI)+" ");
+  //print(sin( player.direction)+" " +cos( player.direction) +"\n");
 
 }
 

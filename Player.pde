@@ -66,28 +66,28 @@ public class Player{
   }
   
   void setLeft(float left){
-    center_x = left + w/2;
+    center_x = left + h/2;
   }
   float getLeft(){
-    return center_x - w/2;
+    return center_x - h/2;
   }
   void setRight(float right){
-    center_x = right - w/2;
+    center_x = right - h/2;
   }
   float getRight(){
-    return center_x + w/2;
+    return center_x + h/2;
   }
   void setTop(float top){
-    center_y = top + h/2;
+    center_y = top + w/2;
   }
   float getTop(){
-    return center_y - h/2;
+    return center_y - w/2;
   }
   void setBottom(float bottom){
-    center_y = bottom - h/2;
+    center_y = bottom - w/2;
   }
   float getBottom(){
-    return center_y + h/2;
+    return center_y + w/2;
   }
 
   
