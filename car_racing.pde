@@ -22,37 +22,33 @@ void draw(){
 
 
 public void resolvePlatformCollisions(Player s, Barrier[] barriers){
-  // add gravity to change_y of sprite
   
+  s.center_x =s.center_x + (s.speed * cos(s.direction));
   
-  // move in y-direction by adding change_y to center_y to update y position.
-  s.center_x +=s.change_x;
   ArrayList<Barrier> col_list = checkCollisionList(s,barriers);
   if( col_list.size() >0 ){
     Barrier bar=col_list.get(0);
-    if(s.change_x >0){
+    if(s.speed >0){
       s.setRight(bar.getLeft());
     }
-    else if(s.change_x<0){
+    else if(s.speed<0){
       s.setLeft(bar.getRight());
     }
-    s.change_x=0;
+    s.speed=0;
   }
   
-  
-  s.center_y+=s.change_y;
-  
+  s.center_y =s.center_y + (s.speed * sin(s.direction));
   
   col_list = checkCollisionList(s,barriers);
   if( col_list.size() >0 ){
     Barrier bar=col_list.get(0);
-    if(s.change_y >0){
+    if(s.speed >0){
       s.setBottom(bar.getTop());
     }
-    else if(s.change_y<0){
+    else if(s.speed<0){
       s.setTop(bar.getBottom());
     }
-    s.change_y=0;
+    s.speed=0;
   }
 
   s.update();
@@ -83,35 +79,43 @@ public ArrayList<Barrier> checkCollisionList(Player s, Barrier[] bars){
 // called whenever a key is pressed.
 void keyPressed(){
   if(keyCode == RIGHT){
-    player.change_x = MOVE_SPEED;
+    //player.change_x = MOVE_SPEED;
+    //player.speed += 0.1;
     player.turnRight();
   }
-  else if(keyCode == LEFT){
-    player.change_x = -MOVE_SPEED;
+   if(keyCode == LEFT){
+    //player.change_x = -MOVE_SPEED;
     player.turnLeft();
   }
-  else if(keyCode == UP ){
-    player.change_y= -MOVE_SPEED;
+  if(keyCode == UP ){
+    //player.change_y= -MOVE_SPEED;
+    //player.speed +=1;
     player.up();
   }
-   else if(keyCode == DOWN ){
-    player.change_y= MOVE_SPEED;
+   if(keyCode == DOWN ){
+    //player.change_y= MOVE_SPEED;
+    //player.speed -= 0.5;
     player.down();
   }
+  print((180*( player.direction)/PI)+" ");
+  print(sin( player.direction)+" " +cos( player.direction) +"\n");
+
 }
 
 // called whenever a key is released.
 void keyReleased(){
   if(keyCode == RIGHT){
-    player.change_x = 0;
+    //player.change_x = 0;
     
   }
-  else if(keyCode == LEFT){
-    player.change_x = 0;
-  }else if(keyCode == UP ){
-    player.change_y=0;
+  if(keyCode == LEFT){
+    //player.change_x = 0;
+  } if(keyCode == UP ){
+    //player.change_y=0;
+    player.speed=0;
   }
-   else if(keyCode == DOWN ){
-    player.change_y= 0;
+    if(keyCode == DOWN ){
+    //player.change_y= 0;
+    player.speed=0;
   }
 }

@@ -20,5 +20,6 @@ public class Track{
        barriers[i].display();
      
      }
+     
   }
 }
