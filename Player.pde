@@ -16,6 +16,7 @@ public class Player{
     //change_y = 0;
     direction=radians(90);
     speed=0;
+    print(w+" "+h);
   }
   public Player(String filename, float scale){
     this(filename, scale, 0, 0);
@@ -62,7 +63,9 @@ public class Player{
   }
   
   public void down(){
-    speed -= 0.4;
+    if(speed > -max_speed){
+      speed -= 0.4;
+    }
   }
   
   void setLeft(float left){
@@ -78,16 +81,16 @@ public class Player{
     return center_x + h/2;
   }
   void setTop(float top){
-    center_y = top + w/2;
+    center_y = top + h/2;
   }
   float getTop(){
-    return center_y - w/2;
+    return center_y - h/2;
   }
   void setBottom(float bottom){
-    center_y = bottom - w/2;
+    center_y = bottom - h/2;
   }
   float getBottom(){
-    return center_y + w/2;
+    return center_y + h/2;
   }
 
   

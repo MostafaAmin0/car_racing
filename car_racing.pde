@@ -28,10 +28,10 @@ public void resolvePlatformCollisions(Player s, Barrier[] barriers){
   ArrayList<Barrier> col_list = checkCollisionList(s,barriers);
   if( col_list.size() >0 ){
     Barrier bar=col_list.get(0);
-    if(s.speed >0){
+    if(s.getRight() >= bar.getLeft() && s.getLeft()<bar.getLeft()){
       s.setRight(bar.getLeft());
     }
-    else if(s.speed<0){
+    else if(s.getLeft() <= bar.getRight() && s.getRight()>bar.getRight()){
       s.setLeft(bar.getRight());
     }
     s.speed=0;
@@ -42,10 +42,10 @@ public void resolvePlatformCollisions(Player s, Barrier[] barriers){
   col_list = checkCollisionList(s,barriers);
   if( col_list.size() >0 ){
     Barrier bar=col_list.get(0);
-    if(s.speed >0){
+    if(s.getBottom() >= bar.getTop() && s.getTop()<bar.getTop()){
       s.setBottom(bar.getTop());
     }
-    else if(s.speed<0){
+    else if(s.getTop() <= bar.getBottom() && s.getBottom() > bar.getBottom()){
       s.setTop(bar.getBottom());
     }
     s.speed=0;
@@ -64,16 +64,10 @@ boolean checkCollision(Player s1, Barrier bar){
   boolean noYOverlap2 = s1.getTop() >= bar.getBottom();
   boolean noYOverlap = noYOverlap1||noYOverlap2;
   
-  println("noXOverlap1 " +noXOverlap1);
-  println("noXOverlap2 " +noXOverlap2);
-  println("noYOverlap1 "+noYOverlap1);
-  println("noYOverlap2 "+noYOverlap2);
-  
   if(noXOverlap || noYOverlap ){
     return false;
   }
   else{
-    print("Alooooooooooooooooooooooooooooooooooooooooooooooo");
     return true;
   }
 }
