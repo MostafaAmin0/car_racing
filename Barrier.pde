@@ -13,6 +13,8 @@ public class Barrier{
   }
   
   void display(){
+    noStroke();
+    fill(0,0,0,0);
     rect(top_x, top_y,w,h);
   }
   

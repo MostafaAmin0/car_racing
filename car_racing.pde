@@ -1,17 +1,14 @@
-
-final static float MOVE_SPEED = 4;
-
 Track track;
 Player player;
 
 void setup(){
-  size(1000,600);
+  size(1200,600);
   track=new Track();
-  player=new Player("Car.png",0.2,220,180); 
+  player=new Player("Car.png",0.15,45,60); 
+  
 }
 
 void draw(){
-  background(0);
   track.display();
   player.display();
   //player.update();
