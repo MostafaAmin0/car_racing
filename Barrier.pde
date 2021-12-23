@@ -13,6 +13,8 @@ public class Barrier{
   }
   
   void display(){
+    noStroke();
+    fill(0,0,0,0);
     rect(top_x, top_y,w,h);
   }
   
@@ -27,6 +29,5 @@ public class Barrier{
   }
   float getLeft(){
     return center_x - w/2;
-  }
-    
+  } 
 }
