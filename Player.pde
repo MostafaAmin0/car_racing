@@ -12,11 +12,8 @@ public class Player{
     h = image.height * scale;
     center_x = x;
     center_y = y;
-    //change_x = 0;
-    //change_y = 0;
     direction=radians(90);
     speed=0;
-    print(w+" "+h);
   }
   public Player(String filename, float scale){
     this(filename, scale, 0, 0);

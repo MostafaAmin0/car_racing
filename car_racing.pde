@@ -11,7 +11,6 @@ void setup(){
 void draw(){
   track.display();
   player.display();
-  //player.update();
   resolvePlatformCollisions(player,track.barriers);
 }
 
@@ -80,43 +79,28 @@ public ArrayList<Barrier> checkCollisionList(Player s, Barrier[] bars){
 // called whenever a key is pressed.
 void keyPressed(){
   if(keyCode == RIGHT){
-    //player.change_x = MOVE_SPEED;
-    //player.speed += 0.1;
     player.turnRight();
   }
    if(keyCode == LEFT){
-    //player.change_x = -MOVE_SPEED;
     player.turnLeft();
   }
   if(keyCode == UP ){
-    //player.change_y= -MOVE_SPEED;
-    //player.speed +=1;
     player.up();
   }
    if(keyCode == DOWN ){
-    //player.change_y= MOVE_SPEED;
-    //player.speed -= 0.5;
     player.down();
   }
-  //print((180*( player.direction)/PI)+" ");
-  //print(sin( player.direction)+" " +cos( player.direction) +"\n");
-
 }
 
 // called whenever a key is released.
 void keyReleased(){
   if(keyCode == RIGHT){
-    //player.change_x = 0;
-    
   }
   if(keyCode == LEFT){
-    //player.change_x = 0;
   } if(keyCode == UP ){
-    //player.change_y=0;
     player.speed=0;
   }
     if(keyCode == DOWN ){
-    //player.change_y= 0;
     player.speed=0;
   }
 }
