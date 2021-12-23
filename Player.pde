@@ -30,6 +30,7 @@ public class Player{
   }
   public void display(){
     pushMatrix();
+    imageMode(CENTER);
    translate(center_x,center_y);
    rotate(direction);
    translate(-center_x,-center_y);
@@ -42,13 +43,20 @@ public class Player{
   }
   
   public void turnRight(){  
-    
-    direction = direction + 1/ (3+(speed));
+    if(speed>0){
+      direction = direction + 1/ (3+(speed));
+    }else{
+      direction = direction + 1/ (3-(speed));
+    }
     direction %= radians(360);
   }
   
   public void turnLeft(){
-    direction = direction - 1/ (3+(speed));
+    if(speed>0){
+      direction = direction - 1/ (3+(speed));
+    }else{
+      direction = direction - 1/ (3-(speed));
+    }
     direction %= radians(360);
     
   }
@@ -63,6 +71,9 @@ public class Player{
   }
   
   public void down(){
+    if (speed>3) {
+      speed = 1;
+    }
     if(speed > -max_speed){
       speed -= 0.4;
     }

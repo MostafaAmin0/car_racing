@@ -5,15 +5,13 @@ Track track;
 Player player;
 
 void setup(){
-  size(1500,600);
+  size(1000,600);
   track=new Track();
-  player=new Player("Car.png",0.2,20,180);
-  
+  player=new Player("Car.png",0.2,220,180); 
 }
 
 void draw(){
   background(0);
-  imageMode(CENTER);
   track.display();
   player.display();
   //player.update();
