@@ -1,17 +1,20 @@
 Track track;
-Player player;
+Player player1;
+Player player2;
 
 void setup(){
   size(1200,600);
   track=new Track();
-  player=new Player("Car.png",0.15,45,60); 
-  
+  player1=new Player("Car.png",0.15,45,60); 
+  player2=new Player("Car 2.png",0.15,110,60);
 }
 
 void draw(){
   track.display();
-  player.display();
-  resolvePlatformCollisions(player,track.barriers);
+  player1.display();
+  player2.display();
+  resolvePlatformCollisions(player1,track.barriers);
+  resolvePlatformCollisions(player2,track.barriers);
 }
 
 
@@ -79,28 +82,43 @@ public ArrayList<Barrier> checkCollisionList(Player p, Barrier[] bars){
 // called whenever a key is pressed.
 void keyPressed(){
   if(keyCode == RIGHT){
-    player.turnRight();
+    player1.turnRight();
   }
    if(keyCode == LEFT){
-    player.turnLeft();
+    player1.turnLeft();
   }
   if(keyCode == UP ){
-    player.up();
+    player1.up();
   }
    if(keyCode == DOWN ){
-    player.down();
+    player1.down();
+  }
+  if(key == 'w'){
+    player2.up();
+  }
+  if(key == 'a'){
+    player2.turnLeft();
+  }
+  if(key == 's'){
+    player2.down();
+  }
+  if(key == 'd'){
+    player2.turnRight();
   }
 }
 
 // called whenever a key is released.
 void keyReleased(){
-  if(keyCode == RIGHT){
-  }
-  if(keyCode == LEFT){
-  } if(keyCode == UP ){
-    player.speed=0;
+ if(keyCode == UP ){
+    player1.speed=0;
   }
     if(keyCode == DOWN ){
-    player.speed=0;
+    player1.speed=0;
+  }
+  if(key == 'w'){
+    player2.speed=0;
+  }
+  if(key == 's'){
+    player2.speed=0;
   }
 }
