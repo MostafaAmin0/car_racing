@@ -6,6 +6,7 @@ public class Player{
   float max_speed = 4;
   float w, h;
   float direction;
+  
   public Player(String filename, float scale, float x, float y){
     image = loadImage(filename);
     w = image.width * scale;
