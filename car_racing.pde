@@ -26,10 +26,10 @@ public void resolvePlatformCollisions(Player p, Barrier[] barriers){
   if( col_list.size() >0 ){
     Barrier bar=col_list.get(0);
     if(p.getRight() >= bar.getLeft() && p.getLeft()<bar.getLeft()){
-      p.setRight(bar.getLeft());
+      p.setRight(bar.getLeft()-1);
     }
     else if(p.getLeft() <= bar.getRight() && p.getRight()>bar.getRight()){
-      p.setLeft(bar.getRight());
+      p.setLeft(bar.getRight()+1);
     }
     p.speed=0;
   }
@@ -40,10 +40,10 @@ public void resolvePlatformCollisions(Player p, Barrier[] barriers){
   if( col_list.size() >0 ){
     Barrier bar=col_list.get(0);
     if(p.getBottom() >= bar.getTop() && p.getTop()<bar.getTop()){
-      p.setBottom(bar.getTop());
+      p.setBottom(bar.getTop()-1);
     }
     else if(p.getTop() <= bar.getBottom() && p.getBottom() > bar.getBottom()){
-      p.setTop(bar.getBottom());
+      p.setTop(bar.getBottom()+1);
     }
     p.speed=0;
   }
@@ -95,6 +95,7 @@ void keyPressed(){
   }
   if(key == 'w'){
     player2.up();
+    //print("bla");
   }
   if(key == 'a'){
     player2.turnLeft();
