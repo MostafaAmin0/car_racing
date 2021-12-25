@@ -3,8 +3,11 @@ Player player1;
 Player player2;
 HashMap<String,Boolean> keymap = new HashMap<String,Boolean>();;
 
+startScreen screen;
+int selectedScreen=0;
+
+
 void setup(){
-  size(1200,600);
   track=new Track();
   player1=new Player("Car.png",0.15,45,60); 
   player2=new Player("Car 2.png",0.15,110,60);
@@ -16,15 +19,30 @@ void setup(){
   keymap.put("left",false);
   keymap.put("right",false);
   keymap.put("down",false);
+  screen=new startScreen();
+  
 }
-
-void draw(){
+void settings() {
+  size(1200, 600);
+}
+void gameScreen(){
   track.display();
   player1.display();
   player2.display();
   move();
   resolvePlatformCollisions(player1,track.barriers);
   resolvePlatformCollisions(player2,track.barriers);
+}
+
+void draw(){
+
+  if(selectedScreen==0){
+    screen.startMenu();
+  }
+  else if(selectedScreen==1){
+    gameScreen();
+  }
+
 }
 
 
