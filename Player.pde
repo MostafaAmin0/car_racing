@@ -42,18 +42,18 @@ public class Player{
   
   public void turnRight(){  
     if(speed>0){
-      direction = direction + 1/ (6+(speed));
+      direction = direction + 1/ (7+(speed));
     }else{
-      direction = direction + 1/ (6-(speed));
+      direction = direction + 1/ (7-(speed));
     }
     direction %= radians(360);
   }
   
   public void turnLeft(){
     if(speed>0){
-      direction = direction - 1/ (6+(speed));
+      direction = direction - 1/ (7+(speed));
     }else{
-      direction = direction - 1/ (6-(speed));
+      direction = direction - 1/ (7-(speed));
     }
     direction %= radians(360);
     

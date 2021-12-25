@@ -4,7 +4,7 @@ final static int RIGHT_FACING = 1;
 final static int LEFT_FACING = 2; 
 
 PImage c ;
-ArrayList<Player> coins; 
+ArrayList<Coin> coins; 
 Coin Coin;
 Track track;
 Player player1;
@@ -20,7 +20,7 @@ Player winner;
 void setup(){
   track=new Track();
   c = loadImage("gold1.png");
-  coins = new ArrayList<Player>();
+  coins = new ArrayList<Coin>();
   coinPlace();
   player1=new Player("Car.png",0.15,45,60); 
   player2=new Player("Car 2.png",0.15,110,60);
@@ -45,7 +45,7 @@ void gameScreen(){
   
   for(Player cc: coins){
      cc.display();
-     ((AnimatedSprite)cc).updateAnimation();
+     ((Coin)cc).updateAnimation();
   }
 
   player1.display();
@@ -105,16 +105,6 @@ public void resolvePlatformCollisions(Player p, Barrier[] barriers){
   p.update();
 }
 
-public void resolveCoinCollisions(Player player){
-ArrayList<Player> collision_list = checkCollisionList(player, coins);
-  if(collision_list.size() > 0){
-    for(Player coin: collision_list){
-       coins.remove(coin);
-       player.speed = random(1,3);
-    }
-  }
-}
-
 boolean checkCollision(Player p1, Barrier bar){
   boolean noXOverlap1 = p1.getRight() <= bar.getLeft() ;
   boolean noXOverlap2 = p1.getLeft() >= bar.getRight() ;
@@ -142,9 +132,19 @@ public ArrayList<Barrier> checkCollisionList(Player p, Barrier[] bars){
 }
 
 
-public boolean checkCollision(Player s1, Player s2){
-  boolean noXOverlap = s1.getRight() <= s2.getLeft() || s1.getLeft() >= s2.getRight();
-  boolean noYOverlap = s1.getBottom() <= s2.getTop() || s1.getTop() >= s2.getBottom();
+public void resolveCoinCollisions(Player player){
+ArrayList<Coin> collision_list = checkCoinCollisionList(player, coins);
+  if(collision_list.size() > 0){
+    for(Player coin: collision_list){
+       coins.remove(coin);
+       player.speed = random(2,3);
+    }
+  }
+}
+
+public boolean checkCoinCollision(Player p, Coin c){
+  boolean noXOverlap = p.getRight() <= c.getLeft() || p.getLeft() >= c.getRight();
+  boolean noYOverlap = p.getBottom() <= c.getTop() || p.getTop() >= c.getBottom();
   if(noXOverlap || noYOverlap){
     return false;
   }
@@ -153,17 +153,17 @@ public boolean checkCollision(Player s1, Player s2){
   }
 }
 
-public ArrayList<Player> checkCollisionList(Player s, ArrayList<Player> list){
-  ArrayList<Player> collision_list = new ArrayList<Player>();
-  for(Player p: list){
-    if(checkCollision(s, p))
-      collision_list.add(p);
+public ArrayList<Coin> checkCoinCollisionList(Player p, ArrayList<Coin> list){
+  ArrayList<Coin> collision_list = new ArrayList<Coin>();
+  for(Coin c: list){
+    if(checkCoinCollision(p, c))
+      collision_list.add(c);
   }
   return collision_list;
 }
 
 
-public ArrayList<Player> co (int n,int x,int x1,int y,int y1){
+public ArrayList<Coin> co (int n,int x,int x1,int y,int y1){
   for (int i=0;i<n;i++){
     Coin coi = new Coin(c, COIN_SCALE);
     coi.center_x = (float)(random(x,x1));
