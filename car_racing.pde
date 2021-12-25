@@ -12,7 +12,9 @@ Player player2;
 HashMap<String,Boolean> keymap = new HashMap<String,Boolean>();;
 
 startScreen screen;
+EndScreen endScreen;
 int selectedScreen=0;
+Player winner;
 
 
 void setup(){
@@ -31,7 +33,7 @@ void setup(){
   keymap.put("right",false);
   keymap.put("down",false);
   screen=new startScreen();
-  
+  endScreen=new EndScreen();
 }
 
 void settings() {
@@ -53,6 +55,7 @@ void gameScreen(){
   resolvePlatformCollisions(player2,track.barriers);
   resolveCoinCollisions(player1);
   resolveCoinCollisions(player2);
+  checkWin();
 }
 
 void draw(){  
@@ -62,6 +65,8 @@ void draw(){
   }
   else if(selectedScreen==1){
     gameScreen();
+  }else if (selectedScreen == 2){
+    endScreen.display(winner);
   }
 
 }
@@ -282,5 +287,27 @@ void move(){
     player2.speed=0;
   }  
 
+}
 
+Player checkFinishLine(){
+  if(player1.getLeft() > 1093 && player1.getRight() < 1191 && player1.getTop() > 583){
+    return player1;
+  }
+  if(player2.getLeft() > 1093 && player2.getRight() < 1191 && player2.getTop() > 583){
+    return player2;
+  }
+  
+  return null;
+}
+
+void checkWin(){
+  winner = checkFinishLine();
+  if(winner != null){
+    if(winner == player1){
+      selectedScreen=2;      
+    }
+    else if(winner == player2){
+      selectedScreen=2;
+    }
+  }
 }
