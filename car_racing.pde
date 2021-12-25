@@ -33,30 +33,29 @@ void setup(){
   screen=new startScreen();
   
 }
+
 void settings() {
   size(1200, 600);
 }
+
 void gameScreen(){
   track.display();
-  player1.display();
-  player2.display();
-  move();
-  resolvePlatformCollisions(player1,track.barriers);
-  resolvePlatformCollisions(player2,track.barriers);
-}
-
-void draw(){
-
-  //track.display();
-
+  
   for(Player cc: coins){
      cc.display();
      ((AnimatedSprite)cc).updateAnimation();
   }
 
+  player1.display();
+  player2.display();
+  move();
+  resolvePlatformCollisions(player1,track.barriers);
+  resolvePlatformCollisions(player2,track.barriers);
   resolveCoinCollisions(player1);
   resolveCoinCollisions(player2);
-  
+}
+
+void draw(){  
 
   if(selectedScreen==0){
     screen.startMenu();
@@ -100,6 +99,7 @@ public void resolvePlatformCollisions(Player p, Barrier[] barriers){
 
   p.update();
 }
+
 public void resolveCoinCollisions(Player player){
 ArrayList<Player> collision_list = checkCollisionList(player, coins);
   if(collision_list.size() > 0){
@@ -107,7 +107,8 @@ ArrayList<Player> collision_list = checkCollisionList(player, coins);
        coins.remove(coin);
        player.speed = random(4,10);
      
-    }}
+    }
+  }
 }
 
 boolean checkCollision(Player p1, Barrier bar){
