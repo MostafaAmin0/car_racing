@@ -1,3 +1,11 @@
+final static float COIN_SCALE = 0.3;
+final static int NEUTRAL_FACING = 0; 
+final static int RIGHT_FACING = 1; 
+final static int LEFT_FACING = 2; 
+
+PImage c ;
+ArrayList<Player> coins; 
+Coin Coin;
 Track track;
 Player player;
 
@@ -5,13 +13,23 @@ void setup(){
   size(1200,600);
   track=new Track();
   player=new Player("Car.png",0.15,45,60); 
+  c = loadImage("gold1.png");
+  coins = new ArrayList<Player>();
+  coinPlace();
+  
   
 }
 
 void draw(){
   track.display();
   player.display();
+  for(Player cc: coins){
+     cc.display();
+     ((AnimatedSprite)cc).updateAnimation();
+  }
   resolvePlatformCollisions(player,track.barriers);
+  resolveCoinCollisions();
+  
 }
 
 
@@ -47,7 +65,15 @@ public void resolvePlatformCollisions(Player p, Barrier[] barriers){
 
   p.update();
 }
-
+public void resolveCoinCollisions(){
+ArrayList<Player> collision_list = checkCollisionList(player, coins);
+  if(collision_list.size() > 0){
+    for(Player coin: collision_list){
+       coins.remove(coin);
+       player.speed = random(4,10);
+     
+    }}
+}
 
 boolean checkCollision(Player p1, Barrier bar){
   boolean noXOverlap1 = p1.getRight() <= bar.getLeft() ;
@@ -74,6 +100,53 @@ public ArrayList<Barrier> checkCollisionList(Player p, Barrier[] bars){
   }
   return collision_list;
 }
+
+
+public boolean checkCollision(Player s1, Player s2){
+  boolean noXOverlap = s1.getRight() <= s2.getLeft() || s1.getLeft() >= s2.getRight();
+  boolean noYOverlap = s1.getBottom() <= s2.getTop() || s1.getTop() >= s2.getBottom();
+  if(noXOverlap || noYOverlap){
+    return false;
+  }
+  else{
+    return true;
+  }
+}
+
+public ArrayList<Player> checkCollisionList(Player s, ArrayList<Player> list){
+  ArrayList<Player> collision_list = new ArrayList<Player>();
+  for(Player p: list){
+    if(checkCollision(s, p))
+      collision_list.add(p);
+  }
+  return collision_list;
+}
+
+
+public ArrayList<Player> co (int n,int x,int x1,int y,int y1){
+  for (int i=0;i<n;i++){
+    Coin coi = new Coin(c, COIN_SCALE);
+    coi.center_x = (float)(random(x,x1));
+    coi.center_y = (float)(random(y,y1));
+    coins.add(coi);
+    
+  }
+  
+  return coins;
+    
+}
+
+
+public void coinPlace(){
+  
+  co(int(random(1,3)),145,520,180,240);
+  co(int(random(1,3)),145,480,500,560);
+  co(1,620,845,500,560);
+  co(1,600,845,30,80);
+  co(1,950,1100,270,320);
+
+}
+
 
 
 // called whenever a key is pressed.
