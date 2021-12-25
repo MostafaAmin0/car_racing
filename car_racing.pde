@@ -110,8 +110,7 @@ ArrayList<Player> collision_list = checkCollisionList(player, coins);
   if(collision_list.size() > 0){
     for(Player coin: collision_list){
        coins.remove(coin);
-       player.speed = random(4,10);
-     
+       player.speed = random(1,3);
     }
   }
 }
@@ -259,6 +258,7 @@ void move(){
     player1.turnLeft();
   }
   if(keymap.get("up")){
+    println(player1.speed);
     player1.up();
   }
   if(keymap.get("down")){

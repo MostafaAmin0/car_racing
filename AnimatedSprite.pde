@@ -26,11 +26,10 @@ public class AnimatedSprite extends Player{
   public void updateAnimation(){
        frame++;
        if(frame%5==0){
-        selectDirection();
-        selectCurrentImages();
-        advanceToNextImage();
-       }
-    
+       selectDirection();
+       selectCurrentImages();
+       advanceToNextImage();
+    }
     
   }
   // if sprite is moving right, set direction to RIGHT_FACING

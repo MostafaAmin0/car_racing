@@ -64,16 +64,16 @@ public class Player{
       speed = 0;
     }
     else if (speed < max_speed){
-      speed += 0.2;    
+      speed += 0.5;    
     }
   }
   
   public void down(){
-    if (speed>1) {
+    if (speed>0.5) {
       speed = 0;
     }
     if(speed > -max_speed){
-      speed -= 0.1;
+      speed -= 0.05;
     }
   }
   
