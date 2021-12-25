@@ -13,18 +13,18 @@ void settings() {
   size(1200, 600);
 }
 void gameScreen(){
-  selectedScreen=1;
   track.display();
   player.display();
   resolvePlatformCollisions(player,track.barriers);
 
 }
 void draw(){
+
   if(selectedScreen==0){
     screen.startMenu();
   }
   else if(selectedScreen==1){
-    screen.selectStart();
+    gameScreen();
   }
 
 }
