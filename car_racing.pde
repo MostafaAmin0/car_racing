@@ -1,18 +1,28 @@
 Track track;
 Player player1;
 Player player2;
+HashMap<String,Boolean> keymap = new HashMap<String,Boolean>();;
 
 void setup(){
   size(1200,600);
   track=new Track();
   player1=new Player("Car.png",0.15,45,60); 
   player2=new Player("Car 2.png",0.15,110,60);
+  keymap.put("w",false);
+  keymap.put("s",false);
+  keymap.put("a",false);
+  keymap.put("d",false);
+  keymap.put("up",false);
+  keymap.put("left",false);
+  keymap.put("right",false);
+  keymap.put("down",false);
 }
 
 void draw(){
   track.display();
   player1.display();
   player2.display();
+  move();
   resolvePlatformCollisions(player1,track.barriers);
   resolvePlatformCollisions(player2,track.barriers);
 }
@@ -82,44 +92,99 @@ public ArrayList<Barrier> checkCollisionList(Player p, Barrier[] bars){
 // called whenever a key is pressed.
 void keyPressed(){
   if(keyCode == RIGHT){
-    player1.turnRight();
+    keymap.put("right",true);
   }
    if(keyCode == LEFT){
-    player1.turnLeft();
+    keymap.put("left",true);
   }
   if(keyCode == UP ){
-    player1.up();
+    keymap.put("up",true);
   }
    if(keyCode == DOWN ){
-    player1.down();
+    keymap.put("down",true);
   }
+  
+    //player 2
   if(key == 'w'){
-    player2.up();
-    //print("bla");
-  }
-  if(key == 'a'){
-    player2.turnLeft();
+    keymap.put("w",true);
   }
   if(key == 's'){
-    player2.down();
+    keymap.put("s",true);
   }
   if(key == 'd'){
-    player2.turnRight();
+    keymap.put("d",true);
+  }
+  if(key == 'a'){
+    keymap.put("a",true);
   }
 }
 
 // called whenever a key is released.
 void keyReleased(){
- if(keyCode == UP ){
-    player1.speed=0;
+ if(keyCode == RIGHT){
+    keymap.put("right",false);
   }
-    if(keyCode == DOWN ){
-    player1.speed=0;
+   if(keyCode == LEFT){
+    keymap.put("left",false);
   }
+  if(keyCode == UP ){
+    keymap.put("up",false);
+  }
+   if(keyCode == DOWN ){
+    keymap.put("down",false);
+  }
+  
+    //player 2
   if(key == 'w'){
-    player2.speed=0;
+    keymap.put("w",false);
   }
   if(key == 's'){
-    player2.speed=0;
+    keymap.put("s",false);
   }
+  if(key == 'd'){
+    keymap.put("d",false);
+  }
+  if(key == 'a'){
+    keymap.put("a",false);
+  }
+}
+
+
+void move(){
+  if(keymap.get("right")){
+    player1.turnRight();
+  }
+  if(keymap.get("left")){
+    player1.turnLeft();
+  }
+  if(keymap.get("up")){
+    player1.up();
+  }
+  if(keymap.get("down")){
+    player1.down();
+  }
+  //or use xnor
+  if (keymap.get("up") == keymap.get("down")){
+    player1.speed=0;
+  }
+  
+  //player 2
+  if(keymap.get("d")){
+    player2.turnRight();
+  }
+  if(keymap.get("a")){
+    player2.turnLeft();
+  }
+  if(keymap.get("w")){
+    player2.up();
+  }
+  if(keymap.get("s")){
+    player2.down();
+  }
+  // or use xnor
+  if(keymap.get("w") == keymap.get("s")){
+    player2.speed=0;
+  }  
+
+
 }
