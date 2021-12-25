@@ -14,7 +14,7 @@ HashMap<String,Boolean> keymap = new HashMap<String,Boolean>();;
 startScreen screen;
 EndScreen endScreen;
 int selectedScreen=0;
-Player winner;
+String winner = "";
 
 
 void setup(){
@@ -258,7 +258,6 @@ void move(){
     player1.turnLeft();
   }
   if(keymap.get("up")){
-    println(player1.speed);
     player1.up();
   }
   if(keymap.get("down")){
@@ -289,24 +288,26 @@ void move(){
 
 }
 
-Player checkFinishLine(){
+int checkFinishLine(){
   if(player1.getLeft() > 1093 && player1.getRight() < 1191 && player1.getTop() > 583){
-    return player1;
+    return 1;
   }
   if(player2.getLeft() > 1093 && player2.getRight() < 1191 && player2.getTop() > 583){
-    return player2;
+    return 2;
   }
   
-  return null;
+  return -1;
 }
 
 void checkWin(){
-  winner = checkFinishLine();
-  if(winner != null){
-    if(winner == player1){
-      selectedScreen=2;      
+  int w = checkFinishLine();
+  if(w != -1){
+    if(w == 1){
+      winner="Player One";
+      selectedScreen=2;     
     }
-    else if(winner == player2){
+    else if(w == 2){
+      winner="Player Two";
       selectedScreen=2;
     }
   }
