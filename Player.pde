@@ -3,7 +3,7 @@ public class Player{
   PImage image;
   float center_x, center_y;
   float speed;
-  float max_speed = 4;
+  float max_speed = 2;
   float w, h;
   float direction;
   
@@ -42,18 +42,18 @@ public class Player{
   
   public void turnRight(){  
     if(speed>0){
-      direction = direction + 1/ (3+(speed));
+      direction = direction + 1/ (6+(speed));
     }else{
-      direction = direction + 1/ (3-(speed));
+      direction = direction + 1/ (6-(speed));
     }
     direction %= radians(360);
   }
   
   public void turnLeft(){
     if(speed>0){
-      direction = direction - 1/ (3+(speed));
+      direction = direction - 1/ (6+(speed));
     }else{
-      direction = direction - 1/ (3-(speed));
+      direction = direction - 1/ (6-(speed));
     }
     direction %= radians(360);
     
@@ -64,16 +64,16 @@ public class Player{
       speed = 0;
     }
     else if (speed < max_speed){
-      speed += 1;    
+      speed += 0.2;    
     }
   }
   
   public void down(){
-    if (speed>3) {
-      speed = 1;
+    if (speed>1) {
+      speed = 0;
     }
     if(speed > -max_speed){
-      speed -= 0.4;
+      speed -= 0.1;
     }
   }
   
