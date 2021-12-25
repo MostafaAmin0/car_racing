@@ -47,14 +47,15 @@ void gameScreen(){
 
 void draw(){
 
-  track.display();
+  //track.display();
 
   for(Player cc: coins){
      cc.display();
      ((AnimatedSprite)cc).updateAnimation();
   }
 
-  resolveCoinCollisions();
+  resolveCoinCollisions(player1);
+  resolveCoinCollisions(player2);
   
 
   if(selectedScreen==0){
@@ -99,7 +100,7 @@ public void resolvePlatformCollisions(Player p, Barrier[] barriers){
 
   p.update();
 }
-public void resolveCoinCollisions(){
+public void resolveCoinCollisions(Player player){
 ArrayList<Player> collision_list = checkCollisionList(player, coins);
   if(collision_list.size() > 0){
     for(Player coin: collision_list){

@@ -1,9 +1,6 @@
 
 public class Coin extends AnimatedSprite{
   
-  
-
-
 
   public Coin(PImage img, float scale){
     
@@ -17,7 +14,5 @@ public class Coin extends AnimatedSprite{
       currentImages =  standNeutral;
   }
   
-  
-
   
 }
