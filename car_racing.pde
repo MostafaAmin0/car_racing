@@ -7,7 +7,7 @@ Player player1;
 Player player2;
 HashMap<String,Boolean> keymap = new HashMap<String,Boolean>();;
 
-startScreen screen;
+StartScreen screen;
 EndScreen endScreen;
 int selectedScreen=0;
 String winner = "";
@@ -19,7 +19,7 @@ void setup(){
   coins = new ArrayList<Coin>();
   coinPlace();
   player1=new Player("Car.png",0.15,45,60); 
-  player2=new Player("Car 2.png",0.15,110,60);
+  player2=new Player("Car2.png",0.15,110,60);
   keymap.put("w",false);
   keymap.put("s",false);
   keymap.put("a",false);
@@ -28,7 +28,7 @@ void setup(){
   keymap.put("left",false);
   keymap.put("right",false);
   keymap.put("down",false);
-  screen=new startScreen();
+  screen=new StartScreen();
   endScreen=new EndScreen();
 }
 

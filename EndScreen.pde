@@ -24,7 +24,7 @@ class EndScreen{
     if (winner == "Player One"){
       img=loadImage("Car.png");
     }else {
-      img=loadImage("Car 2.png");
+      img=loadImage("Car2.png");
     }
     imageMode(CENTER);
     image(img, (width/2)+200, 440, img.width*0.3, img.height*0.3); 

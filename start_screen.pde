@@ -1,4 +1,4 @@
-class startScreen{
+class StartScreen{
   PFont font;
   PImage img1,img2;
 
@@ -6,14 +6,11 @@ class startScreen{
       font=loadFont("CooperBlack-48.vlw");
       textFont(font);
       background(255, 254, 242);
-      //fill(120);
-      //rect(width/2-200,height-450,400,70);
       
       // game name
       fill(0);
       textSize(55);
       text("Car Racing",(width/2)-(textWidth("Car Racing")/2),height-400);
-      
       
       //Start button
       if(mouseX>=width/2-125 && mouseX<=width/2+125 && mouseY>=height-250 && mouseY<=height-190){
