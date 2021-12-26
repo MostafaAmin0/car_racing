@@ -16,6 +16,23 @@ class EndScreen{
     textSize(55);
     text("GAME END!",(width/2)-(textWidth("GAME END!")/2),height-400);
     
+    //retry button 
+    fill(132, 248, 251);
+
+    strokeWeight(2);
+    stroke(0);
+    rect(width/2-125,height-100,250,60,25);
+    fill(0);
+    textSize(40);
+    text("Retry",(width/2)-(textWidth("Retry")/2),height-58);
+    
+    if(mouseX>=width/2-125 && mouseX<=width/2+125 && mouseY>=height-100 && mouseY<=height-40){
+      if(mousePressed){
+        setup();
+      }
+    }
+    
+    
     // winner
     textSize(30);
     text("Winner is :",(width/2)-(textWidth("Winner is :")/2),height-250);

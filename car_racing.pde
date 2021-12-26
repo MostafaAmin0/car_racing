@@ -11,15 +11,17 @@ HashMap<String,Boolean> keymap = new HashMap<String,Boolean>();;
 
 StartScreen screen;
 EndScreen endScreen;
-int selectedScreen=0;
+int selectedScreen;
 String winner = "";
 
 
 //particles system
 ArrayList<Particle> particles;
-int particlesTime=240;
+int particlesTime;
 
 void setup(){
+  selectedScreen=0;
+  particlesTime=240;
   track=new Track();
   c = loadImage("gold1.png");
   coins = new ArrayList<Coin>();
