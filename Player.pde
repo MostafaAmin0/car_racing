@@ -102,5 +102,4 @@ public class Player{
     return center_y + h/2;
   }
 
-  
 }

@@ -15,6 +15,8 @@ class EndScreen{
     fill(0);
     textSize(55);
     text("GAME END!",(width/2)-(textWidth("GAME END!")/2),height-400);
+    
+    // winner
     textSize(30);
     text("Winner is :",(width/2)-(textWidth("Winner is :")/2),height-250);
     text(winner,(width/2)-300,height-150);

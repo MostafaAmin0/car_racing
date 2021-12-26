@@ -1,7 +1,3 @@
-final static float COIN_SCALE = 0.3;
-final static int NEUTRAL_FACING = 0; 
-final static int RIGHT_FACING = 1; 
-final static int LEFT_FACING = 2; 
 
 PImage c ;
 ArrayList<Coin> coins; 
@@ -53,8 +49,8 @@ void gameScreen(){
   move();
   resolvePlatformCollisions(player1,track.barriers);
   resolvePlatformCollisions(player2,track.barriers);
-  resolveCoinCollisions(player1);
-  resolveCoinCollisions(player2);
+  resolveCollisions(player1);
+  resolveCollisions(player2);
   checkWin();
 }
 
@@ -70,7 +66,8 @@ void draw(){
   }
 
 }
-
+/*------------------------------------------------------------------------------------------*/
+//barrier collision
 
 public void resolvePlatformCollisions(Player p, Barrier[] barriers){
   
@@ -131,9 +128,12 @@ public ArrayList<Barrier> checkCollisionList(Player p, Barrier[] bars){
   return collision_list;
 }
 
+/*--------------------------------------------------------------------------------------------------------*/
+//coin collisioin
 
-public void resolveCoinCollisions(Player player){
-ArrayList<Coin> collision_list = checkCoinCollisionList(player, coins);
+
+public void resolveCollisions(Player player){
+ArrayList<Coin> collision_list = resolveCollisionsList(player, coins);
   if(collision_list.size() > 0){
     for(Player coin: collision_list){
        coins.remove(coin);
@@ -142,7 +142,7 @@ ArrayList<Coin> collision_list = checkCoinCollisionList(player, coins);
   }
 }
 
-public boolean checkCoinCollision(Player p, Coin c){
+public boolean resolveCollisions(Player p, Coin c){
   boolean noXOverlap = p.getRight() <= c.getLeft() || p.getLeft() >= c.getRight();
   boolean noYOverlap = p.getBottom() <= c.getTop() || p.getTop() >= c.getBottom();
   if(noXOverlap || noYOverlap){
@@ -153,10 +153,10 @@ public boolean checkCoinCollision(Player p, Coin c){
   }
 }
 
-public ArrayList<Coin> checkCoinCollisionList(Player p, ArrayList<Coin> list){
+public ArrayList<Coin> resolveCollisionsList(Player p, ArrayList<Coin> list){
   ArrayList<Coin> collision_list = new ArrayList<Coin>();
   for(Coin c: list){
-    if(checkCoinCollision(p, c))
+    if(resolveCollisions(p, c))
       collision_list.add(c);
   }
   return collision_list;
@@ -165,7 +165,7 @@ public ArrayList<Coin> checkCoinCollisionList(Player p, ArrayList<Coin> list){
 
 public ArrayList<Coin> co (int n,int x,int x1,int y,int y1){
   for (int i=0;i<n;i++){
-    Coin coi = new Coin(c, COIN_SCALE);
+    Coin coi = new Coin(c, 0.3);
     coi.center_x = (float)(random(x,x1));
     coi.center_y = (float)(random(y,y1));
     coins.add(coi);
@@ -187,6 +187,8 @@ public void coinPlace(){
 
 }
 
+/*---------------------------------------------------------------------------------------------------*/
+//keyboard
 
 
 // called whenever a key is pressed.
@@ -289,10 +291,10 @@ void move(){
 }
 
 int checkFinishLine(){
-  if(player1.getLeft() > 1093 && player1.getRight() < 1191 && player1.getTop() > 583){
+  if(player1.getLeft() > 1093 && player1.getRight() < 1191 && player1.getBottom() > 580){
     return 1;
   }
-  if(player2.getLeft() > 1093 && player2.getRight() < 1191 && player2.getTop() > 583){
+  if(player2.getLeft() > 1093 && player2.getRight() < 1191 && player2.getBottom() > 580){
     return 2;
   }
   

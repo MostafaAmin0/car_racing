@@ -17,17 +17,14 @@ PImage gameBackground;
     //game background 
      gameBackground=loadImage("Background.png");
 
-
-
   }  
   void display(){
     //display background
      background(gameBackground);
+     
     //now draw any barriers
      for(int i = 0; i< barriers.length ; i++){
        barriers[i].display();
-     
      }
-     
   }
 }
