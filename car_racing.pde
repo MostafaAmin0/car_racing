@@ -1,4 +1,6 @@
+import processing.sound.*;
 
+SoundFile file;
 PImage c ;
 ArrayList<Coin> coins; 
 Coin Coin;
@@ -12,6 +14,10 @@ EndScreen endScreen;
 int selectedScreen=0;
 String winner = "";
 
+
+//particles system
+ArrayList<Particle> particles;
+int particlesTime=240;
 
 void setup(){
   track=new Track();
@@ -30,6 +36,8 @@ void setup(){
   keymap.put("down",false);
   screen=new StartScreen();
   endScreen=new EndScreen();
+  particles = new ArrayList<Particle>();
+  file = new SoundFile(this, "FireWorks.mp3");
 }
 
 void settings() {
@@ -62,7 +70,27 @@ void draw(){
   else if(selectedScreen==1){
     gameScreen();
   }else if (selectedScreen == 2){
-    endScreen.display(winner);
+    if(particlesTime-->0)
+    {
+      particles.add(new Particle(new PVector(width/2, 50)));
+      displayParticles();
+    }
+    else
+    {
+      endScreen.display(winner);
+      file.stop();
+    }}
+}
+  
+  
+void displayParticles()
+{
+  for (int i = particles.size()-1; i >= 0; i--) {
+    Particle p = particles.get(i);
+    p.run();
+    if (p.isDead()) {
+      particles.remove(i);
+    }
   }
 
 }
@@ -304,6 +332,7 @@ int checkFinishLine(){
 void checkWin(){
   int w = checkFinishLine();
   if(w != -1){
+      file.play();
     if(w == 1){
       winner="Player One";
       selectedScreen=2;     
