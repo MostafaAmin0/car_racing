@@ -73,10 +73,19 @@ class StartScreen{
     }
   }
   
+  void initializeObjects(){
+    player1=new Player("Car.png",0.15,45,60);
+    player2=new Player("Car2.png",0.15,110,60);
+    coins = new ArrayList<Coin>();
+    coinPlace();
+    particlesTime=240;
+  }
+  
   void selectStart(){
     if(mouseX>=width/2-125 && mouseX<=width/2+125 && mouseY>=height-250 && mouseY<=height-190){
       if(mousePressed){
         selectedScreen=1;
+        initializeObjects();
       }
     }
   }

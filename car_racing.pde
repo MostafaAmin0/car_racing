@@ -21,13 +21,8 @@ int particlesTime;
 
 void setup(){
   selectedScreen=0;
-  particlesTime=240;
   track=new Track();
   c = loadImage("gold1.png");
-  coins = new ArrayList<Coin>();
-  coinPlace();
-  player1=new Player("Car.png",0.15,45,60); 
-  player2=new Player("Car2.png",0.15,110,60);
   keymap.put("w",false);
   keymap.put("s",false);
   keymap.put("a",false);
