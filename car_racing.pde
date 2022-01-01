@@ -44,15 +44,16 @@ void settings() {
 }
 
 void gameScreen(){
+  
   track.display();
+  
+  player1.display();
+  player2.display();
   
   for(Coin cc: coins){
      cc.display();
      cc.updateAnimation();
   }
-
-  player1.display();
-  player2.display();
   move();
   resolvePlatformCollisions(player1,track.barriers);
   resolvePlatformCollisions(player2,track.barriers);
