@@ -15,7 +15,7 @@ class Particle {
     //change in velocity 
     acceleration = new PVector(random(-0.05, 0.05), random(-0.05, 0.05));
     //velocity of particle
-    velocity = new PVector(random(-2, 2), random(-2, 0));
+    velocity = new PVector(random(-2, 2), random(-2, 2));
     lifespan = 200.0;
   }
 

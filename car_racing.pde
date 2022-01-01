@@ -163,9 +163,9 @@ public void resolveCollisions(Player player){
 ArrayList<Coin> collision_list = resolveCollisionsList(player, coins);
   if(collision_list.size() > 0){
     for(Player coin: collision_list){
-      coinSound.play();
+       coinSound.play();
        coins.remove(coin);
-       player.speed = random(2,3);
+       player.speed = random(2.5,3.5);
     }
   }
 }
