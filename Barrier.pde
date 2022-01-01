@@ -1,5 +1,4 @@
 public class Barrier{
-  
   float top_x,top_y;
   float w, h;
   

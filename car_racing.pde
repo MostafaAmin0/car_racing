@@ -1,6 +1,7 @@
 import processing.sound.*;
 
 SoundFile file;
+SoundFile coinSound;
 PImage c ;
 ArrayList<Coin> coins; 
 Coin Coin;
@@ -35,6 +36,7 @@ void setup(){
   endScreen=new EndScreen();
   particles = new ArrayList<Particle>();
   file = new SoundFile(this, "FireWorks.mp3");
+  coinSound= new SoundFile(this, "coin.mp3");
 }
 
 void settings() {
@@ -69,7 +71,7 @@ void draw(){
   }else if (selectedScreen == 2){
     if(particlesTime-->0)
     {
-      particles.add(new Particle(new PVector(width/2, 50)));
+      particles.add(new Particle(new PVector(width/2, height/2)));
       displayParticles();
     }
     else
@@ -161,6 +163,7 @@ public void resolveCollisions(Player player){
 ArrayList<Coin> collision_list = resolveCollisionsList(player, coins);
   if(collision_list.size() > 0){
     for(Player coin: collision_list){
+      coinSound.play();
        coins.remove(coin);
        player.speed = random(2,3);
     }
