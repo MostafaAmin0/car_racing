@@ -8,7 +8,7 @@ Coin Coin;
 Track track;
 Player player1;
 Player player2;
-HashMap<String,Boolean> keymap = new HashMap<String,Boolean>();;
+HashMap<String,Boolean> keymap = new HashMap<String,Boolean>();
 
 StartScreen screen;
 EndScreen endScreen;
@@ -46,9 +46,9 @@ void settings() {
 void gameScreen(){
   track.display();
   
-  for(Player cc: coins){
+  for(Coin cc: coins){
      cc.display();
-     ((Coin)cc).updateAnimation();
+     cc.updateAnimation();
   }
 
   player1.display();
@@ -56,8 +56,8 @@ void gameScreen(){
   move();
   resolvePlatformCollisions(player1,track.barriers);
   resolvePlatformCollisions(player2,track.barriers);
-  resolveCollisions(player1);
-  resolveCollisions(player2);
+  resolveCoinCollisions(player1);
+  resolveCoinCollisions(player2);
   checkWin();
 }
 
@@ -98,6 +98,7 @@ void displayParticles()
 
 public void resolvePlatformCollisions(Player p, Barrier[] barriers){
   
+  //try make change in x axis and check if it would be collision 
   p.center_x =p.center_x + (p.speed * cos(p.direction));
   
   ArrayList<Barrier> col_list = checkCollisionList(p,barriers);
@@ -112,6 +113,7 @@ public void resolvePlatformCollisions(Player p, Barrier[] barriers){
     p.speed=0;
   }
   
+  //try make change in y axis and check if it would be collision
   p.center_y =p.center_y + (p.speed * sin(p.direction));
   
   col_list = checkCollisionList(p,barriers);
@@ -129,23 +131,6 @@ public void resolvePlatformCollisions(Player p, Barrier[] barriers){
   p.update();
 }
 
-boolean checkCollision(Player p1, Barrier bar){
-  boolean noXOverlap1 = p1.getRight() <= bar.getLeft() ;
-  boolean noXOverlap2 = p1.getLeft() >= bar.getRight() ;
-  boolean noXOverlap = noXOverlap1 ||noXOverlap2 ;
-  
-  boolean noYOverlap1 = p1.getBottom() <= bar.getTop() ;
-  boolean noYOverlap2 = p1.getTop() >= bar.getBottom();
-  boolean noYOverlap = noYOverlap1||noYOverlap2;
-  
-  if(noXOverlap || noYOverlap ){
-    return false;
-  }
-  else{
-    return true;
-  }
-}
-
 public ArrayList<Barrier> checkCollisionList(Player p, Barrier[] bars){
   ArrayList<Barrier> collision_list = new ArrayList<Barrier>();
   for(Barrier b: bars){
@@ -155,19 +140,47 @@ public ArrayList<Barrier> checkCollisionList(Player p, Barrier[] bars){
   return collision_list;
 }
 
+boolean checkCollision(Player p1, Barrier bar){
+ 
+  boolean noXOverlap = p1.getRight() <= bar.getLeft() || p1.getLeft() >= bar.getRight() ;
+  
+  boolean noYOverlap = p1.getBottom() <= bar.getTop()||p1.getTop() >= bar.getBottom();
+  
+  if(noXOverlap || noYOverlap ){
+    return false;
+  }
+  else{
+    return true;
+  }
+}
+
 /*--------------------------------------------------------------------------------------------------------*/
+
 //coin collisioin
 
-
-public void resolveCollisions(Player player){
+public void resolveCoinCollisions(Player player){
 ArrayList<Coin> collision_list = resolveCollisionsList(player, coins);
   if(collision_list.size() > 0){
-    for(Player coin: collision_list){
-       coinSound.play();
+    for(Coin coin: collision_list){
+       //coinSound.play();
+       
+       //to make coin disappear
        coins.remove(coin);
-       player.speed = random(2.5,3.5);
+       
+       //increase speed randomly for each coin collied
+       player.speed += random(0,1);
     }
   }
+}
+
+
+public ArrayList<Coin> resolveCollisionsList(Player p, ArrayList<Coin> list){
+  ArrayList<Coin> collision_list = new ArrayList<Coin>();
+  for(Coin c: list){
+    if(resolveCollisions(p, c))
+      collision_list.add(c);
+  }
+  return collision_list;
 }
 
 public boolean resolveCollisions(Player p, Coin c){
@@ -181,38 +194,25 @@ public boolean resolveCollisions(Player p, Coin c){
   }
 }
 
-public ArrayList<Coin> resolveCollisionsList(Player p, ArrayList<Coin> list){
-  ArrayList<Coin> collision_list = new ArrayList<Coin>();
-  for(Coin c: list){
-    if(resolveCollisions(p, c))
-      collision_list.add(c);
-  }
-  return collision_list;
+public void coinPlace(){
+  
+  coin_constrain(int(random(1,3)),145,520,180,240);
+  coin_constrain(int(random(1,3)),145,480,500,560);
+  coin_constrain(1,620,845,500,560);
+  coin_constrain(1,600,845,30,80);
+  coin_constrain(1,950,1100,270,320);
+
 }
 
-
-public ArrayList<Coin> co (int n,int x,int x1,int y,int y1){
-  for (int i=0;i<n;i++){
+public ArrayList<Coin> coin_constrain (int no_coins,int x,int x1,int y,int y1){
+  for (int i=0;i<no_coins;i++){
     Coin coi = new Coin(c, 0.3);
     coi.center_x = (float)(random(x,x1));
     coi.center_y = (float)(random(y,y1));
     coins.add(coi);
     
   }
-  
-  return coins;
-    
-}
-
-
-public void coinPlace(){
-  
-  co(int(random(1,3)),145,520,180,240);
-  co(int(random(1,3)),145,480,500,560);
-  co(1,620,845,500,560);
-  co(1,600,845,30,80);
-  co(1,950,1100,270,320);
-
+  return coins; 
 }
 
 /*---------------------------------------------------------------------------------------------------*/

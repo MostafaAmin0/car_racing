@@ -24,7 +24,7 @@ class EndScreen{
     rect(width/2-125,height-100,250,60,25);
     fill(0);
     textSize(40);
-    text("Retry",(width/2)-(textWidth("Retry")/2),height-58);
+    text("Home",(width/2)-(textWidth("Home")/2),height-58);
     
     if(mouseX>=width/2-125 && mouseX<=width/2+125 && mouseY>=height-100 && mouseY<=height-40){
       if(mousePressed){

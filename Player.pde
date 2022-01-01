@@ -1,3 +1,4 @@
+import java.lang.Math;
 
 public class Player{
   PImage image;
@@ -35,25 +36,27 @@ public class Player{
    image(image, center_x, center_y, w, h); 
    popMatrix();
   }     
+  
   public void update(){
-     center_x =center_x + (speed * cos(direction));
-     center_y =center_y + (speed * sin(direction));
+     center_x =center_x + (speed * cos(direction)); // cos(90) = 0
+     center_y =center_y + (speed * sin(direction)); 
   }
   
   public void turnRight(){  
-    if(speed>0){
-      direction = direction + 1/ (7+(speed));
+    if(speed>=0){
+      direction = direction + 1/ (10-(speed));
     }else{
-      direction = direction + 1/ (7-(speed));
+      direction = direction +  1/ (10+(speed));
     }
     direction %= radians(360);
+    
   }
   
   public void turnLeft(){
     if(speed>0){
-      direction = direction - 1/ (7+(speed));
+      direction = direction - 1/ (10-(speed));
     }else{
-      direction = direction - 1/ (7-(speed));
+      direction = direction - 1/ (10+(speed));
     }
     direction %= radians(360);
     
