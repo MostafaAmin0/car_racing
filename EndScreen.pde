@@ -28,7 +28,7 @@ class EndScreen{
     
     if(mouseX>=width/2-125 && mouseX<=width/2+125 && mouseY>=height-100 && mouseY<=height-40){
       if(mousePressed){
-        setup();
+        selectedScreen=0;
       }
     }
     

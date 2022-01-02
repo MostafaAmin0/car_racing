@@ -163,7 +163,7 @@ public void resolveCoinCollisions(Player player){
 ArrayList<Coin> collision_list = resolveCollisionsList(player, coins);
   if(collision_list.size() > 0){
     for(Coin coin: collision_list){
-       //coinSound.play();
+       coinSound.play();
        
        //to make coin disappear
        coins.remove(coin);

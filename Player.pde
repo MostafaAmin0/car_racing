@@ -32,8 +32,7 @@ public class Player{
     imageMode(CENTER);
    translate(center_x,center_y);
    rotate(direction);
-   translate(-center_x,-center_y);
-   image(image, center_x, center_y, w, h); 
+   image(image, 0, 0, w, h); 
    popMatrix();
   }     
   
